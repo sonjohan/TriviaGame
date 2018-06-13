@@ -3,39 +3,53 @@ $(document).ready(function () {
     var triviaGame = {
         qOptions: [
             {
-                question: 'When did the Liberty Bell get its name?',
-                correctAnswer: 'in the 19th century, when it became a symbol of the abolition of slavery.',
-                possibleAnswers: ['in the 19th century, when it became a symbol of the abolition of slavery.', 'when it was made, in 1701.', 'when it rang on July 4, 1776.', 'None.']
+                question: 'What was Obi-Wan Kenobi‘s final promise to Qui-gon Jinn?',
+                correctAnswer: 'Train Anakin Skywalker.',
+                completeAnswer: 'Obi Wan promised that he would train Anakin Skywalker.',
+                possibleAnswers: ['Train Anakin Skywalker.', 'Defeal the Sith Lords.', 'Train Luke Skywalker.', 'Defeat the Emperor.'],
+                image: 'assets/images/questionImages/obiwanNanakin.jpg'
             },
             {
-                question: 'In the year 1900 in the U.S. what were the most popular first names given to boy and girl babies?',
-                correctAnswer: 'John and Mary.',
-                possibleAnswers: ['John and Mary.', 'William and Elizabeth.', 'Joseph and Catherine.', 'George and Anne.']
+                question: 'Who led the battle of Kashyyyk for the Republic?',
+                correctAnswer: 'Yoda.',
+                completeAnswer: 'Yoda led the battle of Kashyyyk for the Republic.',
+                possibleAnswers: ['Yoda.', 'Luke Skywalker.', 'Han Solo.', 'Chewaka.'],
+                image: 'assets/images/questionImages/yoda.jpg'
             },
             {
-                question: 'Who holds the record for the most victories in a row on the professional golf tour?',
-                correctAnswer: 'Byron Nelson.',
-                possibleAnswers: ['Byron Nelson.', 'Jack Nicklaus.', 'Arnold Palmer.', 'Ben Hogan.']
+                question: 'What does the Republic Cruiser‘s red color signify?',
+                correctAnswer: 'Political neutrality.',
+                completeAnswer: 'Republic Cruiser’s red color signifies its political neutrality.',
+                possibleAnswers: ['Political neutrality.', 'Attack fleet.', 'Nothing.', 'On a mission.'],
+                image: 'assets/images/questionImages/republicCruiser.jpg'
             },
             {
-                question: 'Which of the following items was owned by the fewest U.S. homes in 1990?',
-                correctAnswer: 'Compact disk player.',
-                possibleAnswers: ['Compact disk player.', 'Home computer.', 'Cordless phone.', 'Dishwasher.']
+                question: 'What did hibernation sickness do to Han Solo?',
+                correctAnswer: 'Temporary blindness.',
+                completeAnswer: 'Hibernation sickness caused Han Solo temporary blindness.',
+                possibleAnswers: ['Temporary blindness.', 'Nothing.', 'Temporary memory loss.', 'A cold.'],
+                image: 'assets/images/questionImages/hanSoloBlind.jpg'
             },
             {
-                question: 'Who is third behind Hank Aaron and Babe Ruth in major league career home runs?',
-                correctAnswer: 'Willie Mays.',
-                possibleAnswers: ['Willie Mays.', 'Reggie Jackson.', 'Harmon Killebrew.', 'Frank Robinson.']
+                question: 'What type of droid was Anakin Skywalker building to help his mother?',
+                correctAnswer: 'A protocol droid.',
+                completeAnswer: 'Anakin Skywalker was building a protocol droid to help his mother.',
+                possibleAnswers: ['A protocol droid.', 'An attack droid.', 'R2-D2.', "He wasn't building a droid."],
+                image: 'assets/images/questionImages/protocolDroid.jpg'
             },
             {
-                question: 'In 1990, in what percentage of U.S. married couples did the wife earn more money than the husband?',
-                correctAnswer: '18.',
-                possibleAnswers: ['18.', '8.', '24.', '52.']
+                question: 'Who finally fixed the hyperdrive on the Millennium Falcon?',
+                correctAnswer: 'R2-D2.',
+                completeAnswer: 'R2-D2 fixed the hyperdrive on the Millennium Falcon.',
+                possibleAnswers: ['R2-D2.', 'C-3PO.', 'Han Solo.', 'Chewaka.'],
+                image: 'assets/images/questionImages/r2-d2.jpg'
             },
             {
-                question: 'During the 1980s for six consecutive years what breed of dog was the most popular in the U.S.?',
-                correctAnswer: 'Cocker Spaniel.',
-                possibleAnswers: ['Cocker Spaniel.', 'German Shepherd.', 'Labrador Retriever.', 'Poodle.']
+                question: 'For how long are creatures swallowed by a sarlacc digested?',
+                correctAnswer: 'Over a thousand years.',
+                completeAnswer: 'Creatures swallowed by a sarlacc are digested for over a thousand years.',
+                possibleAnswers: ['Over a thousand years.', 'Over a hundred years', 'Over a month.', 'One day.'],
+                image: 'assets/images/questionImages/sarlacc.jpg'
             }
         ],
         qInPlay: [],
@@ -43,7 +57,6 @@ $(document).ready(function () {
         answered: 0,
         time: 20,
         playing: false,
-        checkAnswer: 0,
         timer: undefined,
         timeToAnswer: undefined,
 
@@ -57,7 +70,8 @@ $(document).ready(function () {
 
         selectQuestion: function () {
 
-            // this if needs to be smaller or equal thna the questions
+            // this if needs to be smaller or equal to the total questions in the object (qOptions)
+            // if question limit is increased make sure the review lines 74-82
 
             if (triviaGame.qInPlay.length < 5) {
                 var added = false;
@@ -72,31 +86,18 @@ $(document).ready(function () {
                 triviaGame.setQuestion();
             } else {
                 if (triviaGame.answered === 0) {
-                    $('#playingDiv').html(
-                        '<div><h4>Wow really? not a single question answered correctly?</h4></div>' +
-                        '<button id="playButton">Click to play Again</button>'
-                    );
+                    $('#playingDiv').html('<div class="result"><h4>Wow really? not a single question answered correctly?</h4><h3>Your rank: Wannabe Jedi</h3></div>');
                 } else if (triviaGame.answered === 1) {
-                    $('#playingDiv').html(
-                        '<div><h4>Wow that was bad, you answered only ' + triviaGame.answered + ' question out of ' + triviaGame.qInPlay.length + '</h4></div>' +
-                        '<button id="playButton">Click to play Again</button>'
-                    );
+                    $('#playingDiv').html('<div class="result"><h4>Wow that was bad, you answered correctly only ' + triviaGame.answered + ' question out of ' + triviaGame.qInPlay.length + '</h4><h3>Your rank: Jedi Initiate</h3></div>');
                 } else if (triviaGame.answered > 1 && triviaGame.answered < 4) {
-                    $('#playingDiv').html(
-                        '<div><h4>That was decent, you answered ' + triviaGame.answered + ' questions out of ' + triviaGame.qInPlay.length + '</h4></div>' +
-                        '<button id="playButton">Click to play Again</button>'
-                    );
+                    $('#playingDiv').html('<div class="result"><h4>That was decent, you answered correctly ' + triviaGame.answered + ' questions out of ' + triviaGame.qInPlay.length + '</h4><h3>Your rank: Padawan</h3></div>');
                 } else if (triviaGame.answered === 4) {
-                    $('#playingDiv').html(
-                        '<div><h4>Almost perfect! you answered ' + triviaGame.answered + ' questions out of ' + triviaGame.qInPlay.length + '</h4></div>' +
-                        '<button id="playButton">Click to play Again</button>'
-                    );
+                    $('#playingDiv').html('<div class="result"><h4>Almost perfect! you answered correctly ' + triviaGame.answered + ' questions out of ' + triviaGame.qInPlay.length + '</h4><h3>Your rank: Jedi</h3></div>');
                 } else if (triviaGame.answered === 5) {
-                    $('#playingDiv').html(
-                        '<div><h4>Ha perfect!, you answered every question!</h4></div>' +
-                        '<button id="playButton">Click to play Again</button>'
-                    );
+                    $('#playingDiv').html('<div class="result"><h4>Ha! perfect!, you answered correctly every question!</h4><h3>Your rank: Master jedi</h3></div>');
                 };
+                $('#playingDiv').append('<div class="playHolder"><button id="playButton" class="btn btn-danger">Click to play Again</button></div>');
+                
                 $('#playButton').on('click', function () {
                     triviaGame.playTrivia();
                     triviaGame.selectQuestion();
@@ -124,10 +125,10 @@ $(document).ready(function () {
             };
             $('#playingDiv').html(
                 '<div id="timer">20</div>' +
-                '<div id=""><h4>' + this.qInPlay[this.qNumber].question + '</h4></div>'
+                '<div id="question"><h4>' + this.qInPlay[this.qNumber].question + '</h4></div>'
             );
             for (i = 0; i < answersUnordered.length; i++) {
-                $('#playingDiv').append('<div id="answer' + i + '" class="answerButton">' + answersUnordered[i] + '</div>');
+                $('#playingDiv').append('<div class="answerButton rounded"><p>' + answersUnordered[i] + '</p></div>');
             };
             this.startTimers();
             this.answerButtons();
@@ -149,12 +150,13 @@ $(document).ready(function () {
             }, 3000);
             if (str === this.qInPlay[this.qNumber - 1].correctAnswer) {
                 this.answered++;
-                $('#playingDiv').html('<div><h4>Correct! the answer was "' + this.qInPlay[this.qNumber - 1].correctAnswer + '"</h4></div>');
+                $('#playingDiv').html('<div class="answerResult"><h4>Correct!<br>"' + this.qInPlay[this.qNumber - 1].completeAnswer + '"</h4></div>');
             } else if (str === 'timeout') {
-                $('#playingDiv').html('<div><h4>Out of time, the correct answer was "' + triviaGame.qInPlay[triviaGame.qNumber - 1].correctAnswer + '"</h4></div>');
+                $('#playingDiv').html('<div class="answerResult"><h4>Out of time,<br>"' + triviaGame.qInPlay[triviaGame.qNumber - 1].completeAnswer + '"</h4></div>');
             } else if (str !== this.qInPlay[this.qNumber - 1].correctAnswer) {
-                $('#playingDiv').html('<div><h4>Wrong!, the correct answer was "' + this.qInPlay[this.qNumber - 1].correctAnswer + '"</h4></div>');
+                $('#playingDiv').html('<div class="answerResult"><h4>Wrong!<br>"' + this.qInPlay[this.qNumber - 1].completeAnswer + '"</h4></div>');
             };
+            $('#playingDiv').append('<div class="questionImage"><img src="'+this.qInPlay[this.qNumber - 1].image+'" class="img-fluid rounded"></div>');
         },
 
         startTimers: function () {
@@ -174,7 +176,6 @@ $(document).ready(function () {
                 }, mouseleave: function () {
                     $(this).removeClass("bg-dark text-light");
                 }, click: function () {
-                    $(this).toggleClass("active");
                     clearTimeout(triviaGame.timeToAnswer);
                     clearInterval(triviaGame.timer);
                     triviaGame.validateAnswer($('.active').text());

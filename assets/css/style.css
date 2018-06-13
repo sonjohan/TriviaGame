@@ -1,0 +1,71 @@
+#background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(polina.jpg) no-repeat;
+    background-size: cover;
+}
+
+.container{
+    max-width: 800px;
+    max-height: 600px;
+    min-height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    opacity: 0.8;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.title{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-20%);
+    transform: translateX(-50%) translateY(-20%);
+    width: auto;
+}
+
+#timer{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 2em;
+    color: #a40b0d;
+}
+
+#question{
+    margin-top: 20px;
+}
+
+.answerButton{
+    margin: 0 20px;
+}
+
+.answerButton p{
+    padding: 10px 20px;        
+}
+
+.answerButton:last-child{
+    margin-bottom: 20px;
+}
+
+.questionImage{
+    margin: 20px 0;
+}
+
+.result, .answerResult, #question{
+    padding: 0 20px;
+}
+
+.answerResult, .questionImage, .questionImage, .playHolder, #timer{
+    text-align: center;
+}
