@@ -28,7 +28,7 @@ $(document).ready(function () {
                 correctAnswer: 'Temporary blindness.',
                 completeAnswer: 'Hibernation sickness caused Han Solo temporary blindness.',
                 possibleAnswers: ['Temporary blindness.', 'Nothing.', 'Temporary memory loss.', 'A cold.'],
-                image: 'assets/images/questionImages/hanSoloBlind.JPG'
+                image: 'assets/images/questionImages/hanSoloBlind.jpg'
             },
             {
                 question: 'What type of droid was Anakin Skywalker building to help his mother?',
