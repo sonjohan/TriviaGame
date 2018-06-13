@@ -28,7 +28,7 @@ $(document).ready(function () {
                 correctAnswer: 'Temporary blindness.',
                 completeAnswer: 'Hibernation sickness caused Han Solo temporary blindness.',
                 possibleAnswers: ['Temporary blindness.', 'Nothing.', 'Temporary memory loss.', 'A cold.'],
-                image: 'assets/images/questionImages/hanSoloBlind.jpg'
+                image: 'assets/images/questionImages/hanSoloBlindd.jpg'
             },
             {
                 question: 'What type of droid was Anakin Skywalker building to help his mother?',
@@ -71,7 +71,7 @@ $(document).ready(function () {
         selectQuestion: function () {
 
             // this if needs to be smaller or equal to the total questions in the object (qOptions)
-            // if question limit is increased make sure the review lines 74-82
+            // if question limit is increased make sure the review lines 91-99
 
             if (triviaGame.qInPlay.length < 5) {
                 var added = false;
@@ -85,6 +85,9 @@ $(document).ready(function () {
 
                 triviaGame.setQuestion();
             } else {
+
+                // possible results
+
                 if (triviaGame.answered === 0) {
                     $('#playingDiv').html('<div class="result"><h4>Wow really? not a single question answered correctly?</h4><h3>Your rank: Wannabe Jedi</h3></div>');
                 } else if (triviaGame.answered === 1) {
