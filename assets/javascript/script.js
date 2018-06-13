@@ -94,7 +94,7 @@ $(document).ready(function () {
                 } else if (triviaGame.answered === 4) {
                     $('#playingDiv').html('<div class="result"><h4>Almost perfect! you answered correctly ' + triviaGame.answered + ' questions out of ' + triviaGame.qInPlay.length + '</h4><h3>Your rank: Jedi</h3></div>');
                 } else if (triviaGame.answered === 5) {
-                    $('#playingDiv').html('<div class="result"><h4>Ha! perfect!, you answered correctly every question!</h4><h3>Your rank: Master jedi</h3></div>');
+                    $('#playingDiv').html('<div class="result"><h4>Perfect!, you answered correctly every question!</h4><h3>Your rank: Master Jedi</h3></div>');
                 };
                 $('#playingDiv').append('<div class="playHolder"><button id="playButton" class="btn btn-danger">Click to play Again</button></div>');
                 
