@@ -176,6 +176,7 @@ $(document).ready(function () {
                 }, mouseleave: function () {
                     $(this).removeClass("bg-dark text-light");
                 }, click: function () {
+                    $(this).toggleClass("active");
                     clearTimeout(triviaGame.timeToAnswer);
                     clearInterval(triviaGame.timer);
                     triviaGame.validateAnswer($('.active').text());

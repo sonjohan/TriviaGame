@@ -66,6 +66,6 @@
     padding: 0 20px;
 }
 
-.answerResult, .questionImage, .questionImage, .playHolder, #timer{
+.answerResult, .questionImage, .questionImage, .playHolder, #timer, .result{
     text-align: center;
 }
