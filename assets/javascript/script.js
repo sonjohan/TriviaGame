@@ -56,22 +56,20 @@ $(document).ready(function () {
         qNumber: 0,
         answered: 0,
         time: 20,
-        playing: false,
         timer: undefined,
         timeToAnswer: undefined,
 
-        playTrivia: function () {
+        reset: function () {
             this.qInPlay = [];
             this.qNumber = 0;
             this.answered = 0;
             this.checkAnswer = 0;
-            this.playing = true;
         },
 
-        selectQuestion: function () {
+        playTrivia: function () {
 
             // this if needs to be smaller or equal to the total questions in the object (qOptions)
-            // if question limit is increased make sure the review lines 91-99
+            // if question limit is increased make sure the review lines 89-97
 
             if (triviaGame.qInPlay.length < 5) {
                 var added = false;
@@ -82,7 +80,6 @@ $(document).ready(function () {
                         added = true;
                     };
                 };
-
                 triviaGame.setQuestion();
             } else {
 
@@ -102,8 +99,8 @@ $(document).ready(function () {
                 $('#playingDiv').append('<div class="playHolder"><button id="playButton" class="btn btn-danger">Click to play Again</button></div>');
                 
                 $('#playButton').on('click', function () {
+                    triviaGame.reset();
                     triviaGame.playTrivia();
-                    triviaGame.selectQuestion();
                 });
             };
         },
@@ -119,17 +116,18 @@ $(document).ready(function () {
 
         setQuestion: function () {
             var answersUnordered = [];
-            console.log('questions so far: ' + this.qNumber);
             while (answersUnordered.length < this.qInPlay[this.qNumber].possibleAnswers.length) {
                 var answerToAdd = this.qInPlay[this.qNumber].possibleAnswers[Math.floor(Math.random() * this.qInPlay[this.qNumber].possibleAnswers.length)];
                 if (this.checkArray(answerToAdd, answersUnordered)) {
                     answersUnordered.push(answerToAdd);
                 };
             };
+
             $('#playingDiv').html(
                 '<div id="timer">20</div>' +
                 '<div id="question"><h4>' + this.qInPlay[this.qNumber].question + '</h4></div>'
             );
+
             for (i = 0; i < answersUnordered.length; i++) {
                 $('#playingDiv').append('<div class="answerButton rounded"><p>' + answersUnordered[i] + '</p></div>');
             };
@@ -148,9 +146,11 @@ $(document).ready(function () {
 
         validateAnswer: function (str) {
             this.qNumber++;
+            
             setTimeout(function () {
-                triviaGame.selectQuestion();
+                triviaGame.playTrivia();
             }, 3000);
+
             if (str === this.qInPlay[this.qNumber - 1].correctAnswer) {
                 this.answered++;
                 $('#playingDiv').html('<div class="answerResult"><h4>Correct!<br>"' + this.qInPlay[this.qNumber - 1].completeAnswer + '"</h4></div>');
@@ -192,8 +192,5 @@ $(document).ready(function () {
         }
     };
 
-    $('#playButton').on('click', function () {
-        triviaGame.playTrivia();
-        triviaGame.selectQuestion();
-    });
+    $('#playButton').on('click', function () {triviaGame.playTrivia();});
 });
